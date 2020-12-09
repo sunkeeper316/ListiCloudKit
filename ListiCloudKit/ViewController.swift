@@ -6,12 +6,13 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var btSwitch: UISwitch!
     @IBOutlet weak var tfInput: UITextField!
+    @IBOutlet weak var lbshow: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        check()
         tableView.delegate = self
         tableView.dataSource = self
         setToolbar(textfield : tfInput)
@@ -31,7 +32,28 @@ class ViewController: UIViewController {
         }
         
     }
-
+    func check() {
+        CKContainer.default().accountStatus { (accountStatus, error) in
+            DispatchQueue.main.async {
+                switch accountStatus {
+                case .available:
+                    print("iCloud Available")
+                    self.lbshow.text = "iCloud Available"
+                case .noAccount:
+                    print("No iCloud account")
+                    self.lbshow.text = "No iCloud account"
+                case .restricted:
+                    print("iCloud restricted")
+                    self.lbshow.text = "iCloud restricted"
+                case .couldNotDetermine:
+                    print("Unable to determine iCloud status")
+                    self.lbshow.text = "Unable to determine iCloud status"
+                }
+            }
+            
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         let ison = NSUbiquitousKeyValueStore.default.bool(forKey: "icloud_sync")
         let test = NSUbiquitousKeyValueStore.default.string(forKey: "test")

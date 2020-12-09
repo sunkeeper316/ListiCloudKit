@@ -49,10 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         */
         
         let container = NSPersistentCloudKitContainer(name: "ListiCloudKit")
-        print("automaticallyMergesChangesFromParent")
-        print("\(container.viewContext.automaticallyMergesChangesFromParent)")
+//        print("automaticallyMergesChangesFromParent")
+//        print("\(container.viewContext.automaticallyMergesChangesFromParent)")
         container.viewContext.automaticallyMergesChangesFromParent = true
-        print("\(container.viewContext.automaticallyMergesChangesFromParent)")
+//        print("\(container.viewContext.automaticallyMergesChangesFromParent)")
         guard let description = container.persistentStoreDescriptions.first else {
               fatalError("###\(#function): Failed to retrieve a persistent store description.")
           }
