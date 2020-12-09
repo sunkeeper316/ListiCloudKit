@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        persistentContainer = setupContainer(withSync: true)
         return true
     }
 
@@ -41,7 +42,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
+        
         let container = NSPersistentCloudKitContainer(name: "ListiCloudKit")
+        
+        guard let description = container.persistentStoreDescriptions.first else {
+              fatalError("###\(#function): Failed to retrieve a persistent store description.")
+          }
+          
+          // this will output "iCloud.es.fluffy.AuthCat"
+          print("cloudkit container identifier : \(description.cloudKitContainerOptions?.containerIdentifier)")
+          
+          // ....
+        description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+
+        description.setOption(true as NSNumber,
+                                      forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+
+          // if "icloud_sync" boolean key isn't set or isn't set to true, don't sync to iCloud
+          if(!NSUbiquitousKeyValueStore.default.bool(forKey: "icloud_sync")){
+              description.cloudKitContainerOptions = nil
+          }
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -79,3 +99,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+func setupContainer(withSync iCloudSync: Bool) -> NSPersistentCloudKitContainer{
+    let container = NSPersistentCloudKitContainer(name: "ListiCloudKit")
+    
+    guard let description = container.persistentStoreDescriptions.first else {
+        fatalError("###\(#function): Failed to retrieve a persistent store description.")
+    }
+    
+    description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+    
+    description.setOption(true as NSNumber,
+                          forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+    
+    
+    // if "cloud_sync" boolean key isn't set or isn't set to true, don't sync to iCloud
+    if(!iCloudSync){
+        description.cloudKitContainerOptions = nil
+    }
+    
+    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        // ...
+    })
+
+    // ...
+    
+    container.viewContext.automaticallyMergesChangesFromParent = true
+    return container
+}

@@ -14,6 +14,10 @@
 		A4618E512580987700BFB0F3 /* ListiCloudKit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A4618E4F2580987700BFB0F3 /* ListiCloudKit.xcdatamodeld */; };
 		A4618E532580987C00BFB0F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4618E522580987C00BFB0F3 /* Assets.xcassets */; };
 		A4618E562580987C00BFB0F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4618E542580987C00BFB0F3 /* LaunchScreen.storyboard */; };
+		A4618E6025809A7900BFB0F3 /* ShowItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4618E5E25809A7900BFB0F3 /* ShowItem+CoreDataClass.swift */; };
+		A4618E6125809A7900BFB0F3 /* ShowItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4618E5F25809A7900BFB0F3 /* ShowItem+CoreDataProperties.swift */; };
+		A4618E6425809B2D00BFB0F3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4618E6325809B2D00BFB0F3 /* Global.swift */; };
+		A4618E6B25809C9E00BFB0F3 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4618E6A25809C9E00BFB0F3 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,11 @@
 		A4618E522580987C00BFB0F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A4618E552580987C00BFB0F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A4618E572580987C00BFB0F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4618E5E25809A7900BFB0F3 /* ShowItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ShowItem+CoreDataClass.swift"; path = "ListiCloudKit/ShowItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A4618E5F25809A7900BFB0F3 /* ShowItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ShowItem+CoreDataProperties.swift"; path = "ListiCloudKit/ShowItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A4618E6325809B2D00BFB0F3 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		A4618E6725809C8C00BFB0F3 /* ListiCloudKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ListiCloudKit.entitlements; sourceTree = "<group>"; };
+		A4618E6A25809C9E00BFB0F3 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4618E6B25809C9E00BFB0F3 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,8 +52,11 @@
 		A4618E3A2580987700BFB0F3 = {
 			isa = PBXGroup;
 			children = (
+				A4618E5E25809A7900BFB0F3 /* ShowItem+CoreDataClass.swift */,
+				A4618E5F25809A7900BFB0F3 /* ShowItem+CoreDataProperties.swift */,
 				A4618E452580987700BFB0F3 /* ListiCloudKit */,
 				A4618E442580987700BFB0F3 /* Products */,
+				A4618E6925809C9E00BFB0F3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +71,10 @@
 		A4618E452580987700BFB0F3 /* ListiCloudKit */ = {
 			isa = PBXGroup;
 			children = (
+				A4618E6725809C8C00BFB0F3 /* ListiCloudKit.entitlements */,
 				A4618E462580987700BFB0F3 /* AppDelegate.swift */,
 				A4618E482580987700BFB0F3 /* SceneDelegate.swift */,
+				A4618E6325809B2D00BFB0F3 /* Global.swift */,
 				A4618E4A2580987700BFB0F3 /* ViewController.swift */,
 				A4618E4C2580987700BFB0F3 /* Main.storyboard */,
 				A4618E522580987C00BFB0F3 /* Assets.xcassets */,
@@ -68,6 +83,14 @@
 				A4618E4F2580987700BFB0F3 /* ListiCloudKit.xcdatamodeld */,
 			);
 			path = ListiCloudKit;
+			sourceTree = "<group>";
+		};
+		A4618E6925809C9E00BFB0F3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A4618E6A25809C9E00BFB0F3 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,10 +163,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4618E6025809A7900BFB0F3 /* ShowItem+CoreDataClass.swift in Sources */,
+				A4618E6125809A7900BFB0F3 /* ShowItem+CoreDataProperties.swift in Sources */,
 				A4618E4B2580987700BFB0F3 /* ViewController.swift in Sources */,
 				A4618E472580987700BFB0F3 /* AppDelegate.swift in Sources */,
 				A4618E512580987700BFB0F3 /* ListiCloudKit.xcdatamodeld in Sources */,
 				A4618E492580987700BFB0F3 /* SceneDelegate.swift in Sources */,
+				A4618E6425809B2D00BFB0F3 /* Global.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,9 +316,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ListiCloudKit/ListiCloudKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2Q39S762VC;
 				INFOPLIST_FILE = ListiCloudKit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -309,9 +337,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ListiCloudKit/ListiCloudKit.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2Q39S762VC;
 				INFOPLIST_FILE = ListiCloudKit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
