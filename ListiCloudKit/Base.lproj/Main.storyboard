@@ -84,6 +84,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btSwitch" destination="68d-QU-1V0" id="xk8-3R-JPu"/>
                         <outlet property="tableView" destination="m9G-o0-afZ" id="KWM-AG-CZh"/>
                         <outlet property="tfInput" destination="qBO-YW-hc4" id="463-7f-Jan"/>
                     </connections>

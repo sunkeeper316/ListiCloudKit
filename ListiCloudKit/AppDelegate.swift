@@ -15,7 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        persistentContainer = setupContainer(withSync: true)
+//        persistentContainer = setupContainer(withSync: true)
+        if let items = loadShowItem() {
+            
+            showItemList = items
+            
+        }
         return true
     }
 
@@ -44,7 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         */
         
         let container = NSPersistentCloudKitContainer(name: "ListiCloudKit")
-        
+        print("automaticallyMergesChangesFromParent")
+        print("\(container.viewContext.automaticallyMergesChangesFromParent)")
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        print("\(container.viewContext.automaticallyMergesChangesFromParent)")
         guard let description = container.persistentStoreDescriptions.first else {
               fatalError("###\(#function): Failed to retrieve a persistent store description.")
           }

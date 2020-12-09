@@ -4,8 +4,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    
-    
+    @IBOutlet weak var btSwitch: UISwitch!
     @IBOutlet weak var tfInput: UITextField!
     
     @IBOutlet weak var tableView: UITableView!
@@ -20,6 +19,8 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
             if let items = loadShowItem() {
                 
@@ -31,23 +32,25 @@ class ViewController: UIViewController {
         
     }
 
-    func setToolbar(textfield : UITextField){
-        let toolBarHeight:CGFloat = 150
-        //製作鍵盤上方幫手
-        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.bounds.width , height: toolBarHeight))
-        //左邊空白處
-        let flexSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        //想製作的按鈕及用途
-        let doneBotton: UIBarButtonItem = UIBarButtonItem(title: "OK", style: .done, target: self, action: #selector(doneButtonAction))
-        toolBar.setItems([flexSpace,doneBotton], animated: false)
-        toolBar.sizeToFit()
-        textfield.inputAccessoryView = toolBar
+    override func viewDidAppear(_ animated: Bool) {
+        let ison = NSUbiquitousKeyValueStore.default.bool(forKey: "icloud_sync")
+        let test = NSUbiquitousKeyValueStore.default.string(forKey: "test")
+        btSwitch.isOn = ison
+        print(ison)
+        print("")
+        print("")
+        print("\(test)")
     }
-    @objc func doneButtonAction() {
-        view.endEditing(true)
-    }
+    
     @IBAction func clickSwitch(_ sender: UISwitch) {
+        
         NSUbiquitousKeyValueStore.default.set(sender.isOn, forKey: "icloud_sync")
+        NSUbiquitousKeyValueStore.default.synchronize()
+        let ison = NSUbiquitousKeyValueStore.default.bool(forKey: "icloud_sync")
+        print("NSUbiquitousKeyValueStore:\(ison)")
+        print(sender.isOn)
+        print("")
+        print("")
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.persistentContainer = setupContainer(withSync: sender.isOn)
         // delete the zone in iCloud if user switch off iCloud sync
@@ -76,7 +79,8 @@ class ViewController: UIViewController {
             self.tableView.reloadData()
             
         }
-        
+        NSUbiquitousKeyValueStore.default.set(name, forKey: "test")
+        NSUbiquitousKeyValueStore.default.synchronize()
     }
     @IBAction func clickdelete(_ sender: UIButton) {
         deleteShowItem()
@@ -87,7 +91,21 @@ class ViewController: UIViewController {
             
         }
     }
-    
+    func setToolbar(textfield : UITextField){
+        let toolBarHeight:CGFloat = 150
+        //製作鍵盤上方幫手
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.bounds.width , height: toolBarHeight))
+        //左邊空白處
+        let flexSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        //想製作的按鈕及用途
+        let doneBotton: UIBarButtonItem = UIBarButtonItem(title: "OK", style: .done, target: self, action: #selector(doneButtonAction))
+        toolBar.setItems([flexSpace,doneBotton], animated: false)
+        toolBar.sizeToFit()
+        textfield.inputAccessoryView = toolBar
+    }
+    @objc func doneButtonAction() {
+        view.endEditing(true)
+    }
 }
 
 extension ViewController : UITableViewDelegate , UITableViewDataSource{
